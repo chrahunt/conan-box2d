@@ -1,0 +1,17 @@
+diff --git Box2D/Common/b2Math.h Box2D/Common/b2Math.h
+# Change to avoid issue using isfinite with GCC 5.4 stdlib
+# namespace std specification to avoid "using implicitly-defined namespace" warnings
+--- Box2D/Common/b2Math.h
++++ Box2D/Common/b2Math.h
+@@ -22,9 +22,12 @@
+ #include "Box2D/Common/b2Settings.h"
+ #include <math.h>
+
++namespace std {}
++
+ /// This function is used to ensure that a floating point number is not a NaN or infinity.
+ inline bool b2IsValid(float32 x)
+ {
++	using namespace std;
+ 	return isfinite(x);
+ }
